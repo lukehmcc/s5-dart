@@ -1,0 +1,16 @@
+name: s5
+description: Use the S5 Network in your Flutter and Dart apps
+version: 1.0.0
+repository: https://github.com/s5-dev/s5-dart
+
+environment:
+  sdk: ^3.2.6
+
+dependencies:
+  hive: ^2.2.3
+  lib5:
+  lib5_crypto_implementation_dart:
+
+dev_dependencies:
+  lints: ^2.1.0
+  test: ^1.24.0

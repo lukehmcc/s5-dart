@@ -2,3 +2,5 @@
 library;
 
 export 'src/s5_base.dart';
+
+export 'package:lib5/lib5.dart';

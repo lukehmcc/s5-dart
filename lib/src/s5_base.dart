@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:hive/hive.dart';
 import 'package:lib5_crypto_implementation_dart/lib5_crypto_implementation_dart.dart';
 import 'package:lib5/lib5.dart';
+import 'package:lib5/fs.dart';
 import 'package:lib5/node.dart';
 import 'package:lib5/util.dart';
 
@@ -14,9 +15,15 @@ class S5 {
 
   CryptoImplementation get crypto => node.crypto;
 
+  FileSystem get fs => FileSystem(api, identity);
+
   bool get hasIdentity => identity != null;
   S5UserIdentity? identity;
   late final Box<Uint8List> _authBox;
+
+  static void initDataPath(String path) {
+    Hive.init(path);
+  }
 
   S5.custom({
     required this.node,

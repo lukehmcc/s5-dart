@@ -9,22 +9,43 @@ import 'package:lib5/util.dart';
 
 import 'hive_key_value_db.dart';
 
+/// Top level Object to access S5 related fuctions.
+///
+/// Usage:
+/// ```dart
+/// final s5 = await S5.create();
+/// ```
+///
+/// Alternatively for sync singleton creation:
+/// ```dart
+/// final s5 = S5.custom(...);
+/// ```
 class S5 {
+  /// Defines the local node.
   final S5NodeBase node;
+
+  /// API Object that can be used to access files.
   S5NodeAPI api;
 
+  /// Cyrpto impl
   CryptoImplementation get crypto => node.crypto;
 
+  /// Allows access to new S5 filesystem API.
   FileSystem get fs => FileSystem(api, identity);
 
+  /// Check if S5 node has identity set up.
   bool get hasIdentity => identity != null;
+
+  /// Define S5 node identity (can be recovered with seed).
   S5UserIdentity? identity;
   late final Box<Uint8List> _authBox;
 
+  /// Path to which Hive points to.
   static void initDataPath(String path) {
     Hive.init(path);
   }
 
+  /// Allows for custom and sync creation of an S5 singleton.
   S5.custom({
     required this.node,
     required this.api,
@@ -34,6 +55,7 @@ class S5 {
     _authBox = authBox;
   }
 
+  /// Allows for zero config creation of a S5 singleton.
   static Future<S5> create({
     Uint8List? databaseEncryptionKey,
     List<String> initialPeers = const [
@@ -109,10 +131,12 @@ class S5 {
     );
   }
 
+  /// Creates new 12 word seed, S5 specific, seed phrase String.
   String generateSeedPhrase() {
     return S5UserIdentity.generateSeedPhrase(crypto: crypto);
   }
 
+  /// Fetches user configuration (including storage services) and keys based on seed phrase.
   Future<void> recoverIdentityFromSeedPhrase(String seedPhrase) async {
     final newIdentity = await S5UserIdentity.fromSeedPhrase(
       seedPhrase,
@@ -129,6 +153,7 @@ class S5 {
     identity = newIdentity;
   }
 
+  /// Register user on new S5 node.
   Future<void> registerOnNewStorageService(String url,
       {String? inviteCode}) async {
     await (api as S5NodeAPIWithIdentity).registerAccount(

@@ -50,7 +50,8 @@ class S5 {
         'name': 's5-dart',
         'keypair': {
           // TODO Maybe make the seed a bit more sticky
-          'seed': base64UrlNoPaddingEncode(crypto.generateRandomBytes(32)),
+          'seed':
+              base64UrlNoPaddingEncode(crypto.generateSecureRandomBytes(32)),
         },
         'p2p': {
           'peers': {

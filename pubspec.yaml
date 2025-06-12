@@ -8,7 +8,8 @@ environment:
 
 dependencies:
   hive: ^2.2.3
-  lib5: ^0.2.0
+  lib5: 
+    git: https://github.com/s5-dev/lib5
   lib5_crypto_implementation_dart:
     git: https://github.com/lukehmcc/lib5_crypto_implementation_dart.git
 

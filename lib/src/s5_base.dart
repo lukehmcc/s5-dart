@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:lib5_crypto_implementation_dart/lib5_crypto_implementation_dart.dart';
 import 'package:lib5/lib5.dart';
 import 'package:lib5/fs.dart';

@@ -7,7 +7,7 @@ environment:
   sdk: ^3.2.6
 
 dependencies:
-  hive: ^2.2.3
+  hive_ce: ^2.11.3
   lib5: 
     git: 
       url: https://github.com/lukehmcc/lib5.git

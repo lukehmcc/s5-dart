@@ -1,6 +1,6 @@
 name: s5
 description: Use the S5 Network in your Flutter and Dart apps
-version: 0.2.1
+version: 0.2.2
 repository: https://github.com/s5-dev/s5-dart
 
 environment:

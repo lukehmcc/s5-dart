@@ -43,29 +43,30 @@ class S5 {
     ],
     bool autoConnectToNewNodes = false,
     Logger? logger,
+    String persistFilePath = "persist.json",
   }) async {
     final crypto = DartCryptoImplementation();
     final node = S5NodeBase(
-      config: {
-        'name': 's5-dart',
-        'keypair': {
-          // TODO Maybe make the seed a bit more sticky
-          'seed': base64UrlNoPaddingEncode(crypto.generateRandomBytes(32)),
-        },
-        'p2p': {
-          'peers': {
-            'initial': initialPeers,
-            'autoConnectToNewNodes': autoConnectToNewNodes,
+        config: {
+          'name': 's5-dart',
+          'keypair': {
+            // TODO Maybe make the seed a bit more sticky
+            'seed': base64UrlNoPaddingEncode(crypto.generateRandomBytes(32)),
+          },
+          'p2p': {
+            'peers': {
+              'initial': initialPeers,
+              'autoConnectToNewNodes': autoConnectToNewNodes,
+            }
           }
-        }
-      },
-      logger: logger ??
-          SimpleLogger(
-            prefix: '[S5] ',
-            format: false,
-          ),
-      crypto: crypto,
-    );
+        },
+        logger: logger ??
+            SimpleLogger(
+              prefix: '[S5] ',
+              format: false,
+            ),
+        crypto: crypto,
+        persistFilePath: persistFilePath);
 
     await node.init(
       blobDB: await _openDB('blob'),
